@@ -23,7 +23,7 @@ Among other things, the server prints `https://192-168-2-6.local-ip.sh:8443/page
 GitHub Pages publishes `probe/page/` on every push to `main` (workflow `.github/workflows/probe-page.yml`). One-time setup: *Settings → Pages → Source: GitHub Actions*. Open on the TV:
 
 ```
-https://flowan.github.io/yomi-test/index.html?server=192-168-2-6
+https://yomiwatch.github.io/yomi-test/index.html?server=192-168-2-6
 ```
 
 `?server=` is the Mac's LAN address with dashes. Make sure the probe server is running on the Mac.
