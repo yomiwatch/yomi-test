@@ -18,12 +18,12 @@ npm run server            # https op 8443, http op 8080; print de URL's
 
 De server print o.a. `https://192-168-2-6.local-ip.sh:8443/pagina/index.html?server=192-168-2-6`. Rapporten komen in `resultaten/`.
 
-## Hosting (door de eigenaar)
+## Hosting
 
-Upload de **inhoud van `proef/pagina/`** (`index.html`, `proef.js`, `codecs.js`, `netwerk.js`, `ok.txt`) naar een publieke https-host. Open op de tv:
+GitHub Pages publiceert `proef/pagina/` bij elke push naar `main` (workflow `.github/workflows/proef-pagina.yml`). Eenmalig: *Settings → Pages → Source: GitHub Actions*. Open op de tv:
 
 ```
-https://<jouw-host>/<pad>/index.html?server=192-168-2-6
+https://flowan.github.io/yomi-app/index.html?server=192-168-2-6
 ```
 
 `?server=` is het LAN-adres van de Mac met streepjes. Zorg dat de proefserver op de Mac draait.
