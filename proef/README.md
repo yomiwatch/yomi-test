@@ -23,7 +23,7 @@ De server print o.a. `https://192-168-2-6.local-ip.sh:8443/pagina/index.html?ser
 GitHub Pages publiceert `proef/pagina/` bij elke push naar `main` (workflow `.github/workflows/proef-pagina.yml`). Eenmalig: *Settings → Pages → Source: GitHub Actions*. Open op de tv:
 
 ```
-https://flowan.github.io/yomi-app/index.html?server=192-168-2-6
+https://flowan.github.io/yomi-test/index.html?server=192-168-2-6
 ```
 
 `?server=` is het LAN-adres van de Mac met streepjes. Zorg dat de proefserver op de Mac draait.
