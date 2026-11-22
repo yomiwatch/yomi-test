@@ -19,7 +19,7 @@ export function metTimeout(p, ms, label) {
 export function serverAdressen(serverParam) {
   if (!serverParam || !/^\d{1,3}(-\d{1,3}){3}$/.test(serverParam)) return null;
   return {
-    https: `https://${serverParam}.traefik.me:8443`,
+    https: `https://${serverParam}.local-ip.sh:8443`,
     http: `http://${serverParam.replaceAll('-', '.')}:8080`,
   };
 }
@@ -31,7 +31,7 @@ export function serverAdressen(serverParam) {
  */
 export async function meetNetwerk(adressen, fetchFn, timeoutMs = 5000) {
   const gevallen = [
-    { naam: 'LAN https (traefik.me)', url: `${adressen.https}/ping` },
+    { naam: 'LAN https (local-ip.sh)', url: `${adressen.https}/ping` },
     { naam: 'LAN http (verwacht geblokkeerd)', url: `${adressen.http}/ping` },
     { naam: 'Eigen herkomst (controle)', url: './ok.txt' },
   ];

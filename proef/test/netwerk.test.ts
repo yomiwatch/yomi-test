@@ -4,7 +4,7 @@ import { metTimeout, serverAdressen, meetNetwerk } from '../pagina/netwerk.js';
 
 test('serverAdressen', () => {
   assert.deepEqual(serverAdressen('192-168-1-20'), {
-    https: 'https://192-168-1-20.traefik.me:8443', http: 'http://192.168.1.20:8080' });
+    https: 'https://192-168-1-20.local-ip.sh:8443', http: 'http://192.168.1.20:8080' });
   assert.equal(serverAdressen(null), null);
   assert.equal(serverAdressen('evil.com'), null);
 });
@@ -19,7 +19,7 @@ test('meetNetwerk: falende fetch wordt een meting met ok=false en fout, geen exc
     return new Response('ok', { status: 200 });
   }) as typeof fetch;
   const r = await meetNetwerk(serverAdressen('192-168-1-20')!, fake, 100);
-  assert.deepEqual(r.map((x: { naam: string }) => x.naam), ['LAN https (traefik.me)', 'LAN http (verwacht geblokkeerd)', 'Eigen herkomst (controle)']);
+  assert.deepEqual(r.map((x: { naam: string }) => x.naam), ['LAN https (local-ip.sh)', 'LAN http (verwacht geblokkeerd)', 'Eigen herkomst (controle)']);
   assert.equal(r[0].ok, true);
   assert.equal(r[0].status, 200);
   assert.equal(r[1].ok, false);
