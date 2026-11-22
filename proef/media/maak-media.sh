@@ -24,6 +24,8 @@ maak h264-1080p-aac 1920x1080 30 -c:v libx264 -profile:v high -preset veryfast -
 maak h264-1080p-ac3 1920x1080 30 -c:v libx264 -profile:v high -preset veryfast -pix_fmt yuv420p -c:a ac3 -ac 6
 maak hevc-1080p-aac 1920x1080 30 -c:v libx265 -profile:v main -preset ultrafast -pix_fmt yuv420p -tag:v hvc1 -c:a aac -ac 2
 maak hevc-4k-sdr-aac 3840x2160 24 -c:v libx265 -profile:v main10 -preset ultrafast -pix_fmt yuv420p10le -tag:v hvc1 -c:a aac -ac 2
+maak hevc-4k-hdr10-aac 3840x2160 24 -c:v libx265 -profile:v main10 -preset ultrafast -pix_fmt yuv420p10le -tag:v hvc1 \
+  -x265-params "$HDR10" -color_primaries bt2020 -color_trc smpte2084 -colorspace bt2020nc -c:a aac -ac 2
 maak hevc-4k-hdr10-eac3 3840x2160 24 -c:v libx265 -profile:v main10 -preset ultrafast -pix_fmt yuv420p10le -tag:v hvc1 \
   -x265-params "$HDR10" -color_primaries bt2020 -color_trc smpte2084 -colorspace bt2020nc -c:a eac3 -ac 6
 

@@ -38,13 +38,38 @@ test('GET /ping geeft ok en pnaGezien=false zolang er geen PNA-preflight was', a
   assert.deepEqual(await r.json(), { ok: true, pnaGezien: false });
 });
 
-test('OPTIONS met PNA-verzoek geeft toestemming en wordt onthouden', async () => {
+test('OPTIONS met PNA-verzoek geeft toestemming en wordt per herkomst onthouden', async () => {
   const r = await fetch(`${basis}/ping`, { method: 'OPTIONS', headers: {
     Origin: 'https://proef.example', 'Access-Control-Request-Private-Network': 'true' } });
   assert.equal(r.status, 204);
   assert.equal(r.headers.get('access-control-allow-private-network'), 'true');
   assert.equal(r.headers.get('access-control-allow-origin'), 'https://proef.example');
-  assert.deepEqual(await (await fetch(`${basis}/ping`)).json(), { ok: true, pnaGezien: true });
+  assert.deepEqual(await (await fetch(`${basis}/ping`, { headers: { Origin: 'https://proef.example' } })).json(), { ok: true, pnaGezien: true });
+  assert.deepEqual(await (await fetch(`${basis}/ping`, { headers: { Origin: 'https://ander.example' } })).json(), { ok: true, pnaGezien: false });
+});
+
+test('rapport krijgt alleen PNA-preflights van de eigen herkomst, en daarna wordt het gewist', async () => {
+  await fetch(`${basis}/ping`, { method: 'OPTIONS', headers: { Origin: 'https://a.example', 'Access-Control-Request-Private-Network': 'true' } });
+  const post = (origin: string) => fetch(`${basis}/rapport`, { method: 'POST', headers: { Origin: origin }, body: JSON.stringify(geldig) });
+  const lees = async (r: Response) => JSON.parse(fs.readFileSync(path.join(resultaten, ((await r.json()) as { opgeslagen: string }).opgeslagen), 'utf8'));
+  assert.equal((await lees(await post('https://b.example'))).pnaGezien, false);
+  const a1 = await lees(await post('https://a.example'));
+  assert.equal(a1.pnaGezien, true);
+  assert.equal(a1.pnaPreflights.length, 1);
+  assert.equal((await lees(await post('https://a.example'))).pnaGezien, false);
+  for (const f of fs.readdirSync(resultaten)) fs.rmSync(path.join(resultaten, f));
+});
+
+test('afgebroken upload laat de server niet crashen', async () => {
+  const net = await import('node:net');
+  const { port } = server.address() as AddressInfo;
+  await new Promise<void>((klaar) => {
+    const s = net.connect(port, '127.0.0.1', () => {
+      s.write('POST /rapport HTTP/1.1\r\nHost: x\r\nContent-Length: 5000\r\n\r\n{"versie":');
+      setTimeout(() => { s.destroy(); setTimeout(klaar, 50); }, 20);
+    });
+  });
+  assert.equal((await fetch(`${basis}/ping`)).status, 200);
 });
 
 test('POST /rapport slaat geldig rapport op met pnaGezien', async () => {

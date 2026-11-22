@@ -24,8 +24,20 @@
   <h1>Yomi · tv-proef</h1>
   <p class="intro">De metingen starten vanzelf. Wacht tot "Rapport" onderaan iets meldt. Druk daarna op de toetsen uit de sectie "Toetsen".</p>
 </main>
-<script>window.hlsMislukt = false;</script>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js" onerror="window.hlsMislukt = true"></script>
+<script>
+  // Vangnet voor oudere browsers: toon fouten en de user-agent als proef.js niet start.
+  window.hlsMislukt = false;
+  window.proefGestart = false;
+  function toonFout(t) {
+    var p = document.createElement('p');
+    p.style.color = '#FF8A8A';
+    p.textContent = t;
+    document.getElementById('uitvoer').appendChild(p);
+  }
+  window.onerror = function (m, bron, regel) { toonFout('Fout: ' + m + ' (' + bron + ':' + regel + ')'); };
+  setTimeout(function () { if (!window.proefGestart) toonFout('proef.js niet gestart. User-agent: ' + navigator.userAgent); }, 3000);
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js" onerror="window.hlsMislukt = true"></script>
 <script type="module" src="./proef.js"></script>
 </body>
 </html>

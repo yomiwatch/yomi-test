@@ -25,7 +25,9 @@ type Opties = { mediaMap: string, paginaMap: string, resultatenMap: string, log?
 
 export function maakHandler(opties: Opties): (req: IncomingMessage, res: ServerResponse) => void {
   const log = opties.log ?? (() => {});
-  let pnaGezien = false;
+  // PNA-preflights per herkomst; een rapport krijgt alleen die van zijn eigen herkomst en wist ze daarna.
+  let preflights: { origin: string, tijd: string, pad: string }[] = [];
+  const vanHerkomst = (origin: string) => preflights.filter((p) => p.origin === origin);
 
   const json = (res: ServerResponse, status: number, body: unknown): void => {
     res.writeHead(status, { 'content-type': 'application/json' });
@@ -45,11 +47,11 @@ export function maakHandler(opties: Opties): (req: IncomingMessage, res: ServerR
         'content-length': st.size,
         'cache-control': 'no-store',
       });
-      fs.createReadStream(doel).pipe(res);
+      fs.createReadStream(doel).on('error', () => res.destroy()).pipe(res);
     });
   };
 
-  const ontvangRapport = (req: IncomingMessage, res: ServerResponse): void => {
+  const ontvangRapport = (req: IncomingMessage, res: ServerResponse, origin: string): void => {
     const delen: Buffer[] = [];
     let grootte = 0;
     let teGroot = false;
@@ -65,7 +67,10 @@ export function maakHandler(opties: Opties): (req: IncomingMessage, res: ServerR
       const rapport = valideerRapport(data);
       if (!rapport) return json(res, 400, { fout: 'ongeldig rapport' });
       const naam = bestandsnaam(new Date(), rapport.ua);
-      fs.writeFile(path.join(opties.resultatenMap, naam), JSON.stringify({ ...rapport, pnaGezien }, null, 2), (err) => {
+      const pnaPreflights = vanHerkomst(origin);
+      preflights = preflights.filter((p) => p.origin !== origin);
+      const opslag = { ...rapport, herkomst: origin, pnaGezien: pnaPreflights.length > 0, pnaPreflights };
+      fs.writeFile(path.join(opties.resultatenMap, naam), JSON.stringify(opslag, null, 2), (err) => {
         if (err) return json(res, 500, { fout: 'opslaan mislukt' });
         log(`rapport opgeslagen: ${naam}`);
         json(res, 201, { opgeslagen: naam });
@@ -74,11 +79,12 @@ export function maakHandler(opties: Opties): (req: IncomingMessage, res: ServerR
   };
 
   return (req, res) => {
-    const origin = req.headers.origin;
-    res.setHeader('Access-Control-Allow-Origin', typeof origin === 'string' ? origin : '*');
+    const origin = typeof req.headers.origin === 'string' ? req.headers.origin : '-';
+    res.setHeader('Access-Control-Allow-Origin', origin === '-' ? '*' : origin);
+    req.on('error', () => {});
     res.setHeader('Vary', 'Origin');
     const pad = (req.url ?? '/').split('?')[0];
-    log(`${req.method} ${pad} (origin: ${origin ?? '-'})`);
+    log(`${req.method} ${pad} (origin: ${origin})`);
 
     if (req.method === 'OPTIONS') {
       const headers: Record<string, string> = {
@@ -88,15 +94,15 @@ export function maakHandler(opties: Opties): (req: IncomingMessage, res: ServerR
       };
       if (req.headers['access-control-request-private-network'] === 'true') {
         headers['Access-Control-Allow-Private-Network'] = 'true';
-        pnaGezien = true;
+        preflights.push({ origin, tijd: new Date().toISOString(), pad });
         log('PNA-preflight ontvangen');
       }
       res.writeHead(204, headers);
       res.end();
       return;
     }
-    if (req.method === 'GET' && pad === '/ping') return json(res, 200, { ok: true, pnaGezien });
-    if (req.method === 'POST' && pad === '/rapport') return ontvangRapport(req, res);
+    if (req.method === 'GET' && pad === '/ping') return json(res, 200, { ok: true, pnaGezien: vanHerkomst(origin).length > 0 });
+    if (req.method === 'POST' && pad === '/rapport') return ontvangRapport(req, res, origin);
     if (req.method === 'GET' && pad.startsWith('/media/')) return serveer(res, opties.mediaMap, pad.slice('/media/'.length));
     if (req.method === 'GET' && pad.startsWith('/pagina/')) return serveer(res, opties.paginaMap, pad.slice('/pagina/'.length));
     json(res, 404, { fout: 'niet gevonden' });

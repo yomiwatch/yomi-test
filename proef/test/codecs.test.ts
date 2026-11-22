@@ -27,3 +27,10 @@ test('meetCapabilities zet fouten om naar null-waarden met foutmelding', async (
   assert.match(hdr.fout!, /HDR niet bekend/);
   assert.equal(r[0].supported, true);
 });
+
+test('controleerHdrVelden: TypeError op ongeldige transferFunction betekent dat HDR-velden gelezen worden', async () => {
+  const { controleerHdrVelden } = await import('../pagina/codecs.js');
+  assert.equal(await controleerHdrVelden(async (c: any) => { if (c.video.transferFunction === 'ongeldig') throw new TypeError('bad enum'); return { supported: true }; }), 'gerespecteerd');
+  assert.equal(await controleerHdrVelden(async () => ({ supported: true })), 'genegeerd');
+  assert.equal(await controleerHdrVelden(async () => { throw new Error('anders'); }), 'onbekend');
+});

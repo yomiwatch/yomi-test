@@ -20,7 +20,7 @@ export function serverAdressen(serverParam) {
   if (!serverParam || !/^\d{1,3}(-\d{1,3}){3}$/.test(serverParam)) return null;
   return {
     https: `https://${serverParam}.local-ip.sh:8443`,
-    http: `http://${serverParam.replaceAll('-', '.')}:8080`,
+    http: `http://${serverParam.split('-').join('.')}:8080`,
   };
 }
 

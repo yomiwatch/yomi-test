@@ -1,13 +1,13 @@
 // Tv-proef: draait alle metingen automatisch en toont/verstuurt de uitkomst.
-import { meetCodecs, meetCapabilities } from './codecs.js';
+import { meetCodecs, meetCapabilities, controleerHdrVelden } from './codecs.js';
 import { metTimeout, serverAdressen, meetNetwerk } from './netwerk.js';
+import { VARIANTEN, TOETS_INSTRUCTIE, afspeelMethoden, moetDirectVersturen } from './afspelen.js';
 
-const VARIANTEN = ['h264-1080p-aac', 'h264-1080p-ac3', 'hevc-1080p-aac', 'hevc-4k-sdr-aac', 'hevc-4k-hdr10-eac3'];
-const TOETS_INSTRUCTIE = 'Druk op: pijltjes, OK, Terug, Play/Pauze, Rood, Groen, Geel, Blauw, Info';
+window.proefGestart = true;
 
 const uitvoer = document.getElementById('uitvoer');
 const adressen = serverAdressen(new URLSearchParams(location.search).get('server'));
-const rapport = { versie: 1, ua: navigator.userAgent, tijd: '', apparaat: {}, codecs: [], capabilities: [], netwerk: [], afspelen: [], toetsen: [] };
+const rapport = { versie: 1, ua: navigator.userAgent, tijd: '', herkomstPagina: location.origin, apparaat: {}, codecs: [], capabilities: [], hdrVelden: '', netwerk: [], afspelen: [], toetsen: [] };
 
 function sectie(titel) {
   const s = document.createElement('section');
@@ -33,9 +33,9 @@ function regel(doel, status, tekst) {
 
 const foutTekst = (e) => String(e && e.message ? e.message : e);
 
-function meetApparaat() {
+async function meetApparaat() {
   const s = sectie('Apparaat');
-  const mm = (q) => { try { return window.matchMedia(q).matches; } catch { return null; } };
+  const mm = (q) => { try { return window.matchMedia(q).matches; } catch (e) { return null; } };
   const a = {
     scherm: `${screen.width}×${screen.height}`,
     pixelRatio: window.devicePixelRatio,
@@ -49,6 +49,15 @@ function meetApparaat() {
   regel(s, null, `Scherm ${a.scherm}, pixelratio ${a.pixelRatio}, venster ${a.venster}`);
   regel(s, a.hdrScherm, `HDR-scherm (dynamic-range: high): ${a.hdrScherm}`);
   regel(s, a.hdrVideo, `HDR-video (video-dynamic-range: high): ${a.hdrVideo}`);
+  a.lnaToestemming = 'niet beschikbaar';
+  try {
+    if (navigator.permissions && navigator.permissions.query) {
+      a.lnaToestemming = (await navigator.permissions.query({ name: 'local-network-access' })).state;
+    }
+  } catch (e) {
+    a.lnaToestemming = `onbekend (${foutTekst(e)})`;
+  }
+  regel(s, null, `Toestemming lokaal netwerk (local-network-access): ${a.lnaToestemming}`);
 }
 
 function meetCodecSectie() {
@@ -72,6 +81,8 @@ async function meetCapabilitySectie() {
   for (const c of rapport.capabilities) {
     regel(s, c.supported, c.fout ? `${c.naam}: fout ${c.fout}` : `${c.naam}: supported ${c.supported}, smooth ${c.smooth}, zuinig ${c.powerEfficient}`);
   }
+  rapport.hdrVelden = await controleerHdrVelden((c) => navigator.mediaCapabilities.decodingInfo(c));
+  regel(s, rapport.hdrVelden === 'gerespecteerd', `HDR-velden worden gelezen: ${rapport.hdrVelden}${rapport.hdrVelden === 'genegeerd' ? ' (HDR-uitkomst hierboven is niet betrouwbaar)' : ''}`);
 }
 
 async function meetNetwerkSectie() {
@@ -86,29 +97,24 @@ async function meetNetwerkSectie() {
   }
 }
 
-function speelAf(naam, bron, s) {
+function speelAf(naam, bron, s, methode) {
   const video = document.createElement('video');
   video.muted = true;
   video.playsInline = true;
   s.appendChild(video);
   let hls = null;
-  const uitkomst = { naam, ok: false, methode: '', resolutie: '', fout: undefined };
+  const uitkomst = { naam, ok: false, methode, resolutie: '', fout: undefined };
 
   const klaar = new Promise((resolve, reject) => {
     video.addEventListener('timeupdate', () => { if (video.currentTime > 2) resolve(); });
     video.addEventListener('error', () => reject(new Error(`video-fout ${video.error ? video.error.code : '?'}`)));
-    if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      uitkomst.methode = 'native';
+    if (methode === 'native') {
       video.src = bron;
-    } else if (window.Hls && window.Hls.isSupported()) {
-      uitkomst.methode = 'hls.js';
+    } else {
       hls = new window.Hls();
       hls.on(window.Hls.Events.ERROR, (_e, d) => { if (d.fatal) reject(new Error(`hls.js: ${d.type} ${d.details}`)); });
       hls.loadSource(bron);
       hls.attachMedia(video);
-    } else {
-      reject(new Error(window.hlsMislukt ? 'hls.js niet geladen' : 'geen HLS-ondersteuning'));
-      return;
     }
     const p = video.play();
     if (p && p.catch) p.catch((e) => reject(e));
@@ -128,18 +134,42 @@ function speelAf(naam, bron, s) {
     });
 }
 
+// hls.js laadt async; wacht er maximaal 10 s op zodat een hangend CDN de proef niet blokkeert.
+function wachtOpHls() {
+  return new Promise((resolve) => {
+    const start = Date.now();
+    const kijk = () => {
+      if (window.Hls || window.hlsMislukt || Date.now() - start > 10000) return resolve(Boolean(window.Hls));
+      setTimeout(kijk, 200);
+    };
+    kijk();
+  });
+}
+
 async function meetAfspelen() {
   const s = sectie('Afspelen (HLS, fMP4)');
   if (!adressen) {
     regel(s, false, 'Overgeslagen: geen server');
     return;
   }
+  const hlsGeladen = await wachtOpHls();
+  const nativeKan = Boolean(document.createElement('video').canPlayType('application/vnd.apple.mpegurl'));
+  const hlsKan = hlsGeladen && window.Hls.isSupported();
+  rapport.hlsJs = hlsGeladen ? (hlsKan ? 'geladen, MSE ondersteund' : 'geladen, MSE niet ondersteund') : 'niet geladen';
+  regel(s, hlsKan, `hls.js: ${rapport.hlsJs} · native HLS: ${nativeKan ? 'ja' : 'nee'}`);
+  const methoden = afspeelMethoden(nativeKan, hlsKan);
+  if (methoden.length === 0) {
+    regel(s, false, 'Geen manier om HLS af te spelen');
+    return;
+  }
   for (const naam of VARIANTEN) {
-    const bezig = regel(s, null, `${naam}: bezig…`);
-    const u = await speelAf(naam, `${adressen.https}/media/${naam}/index.m3u8`, s);
-    rapport.afspelen.push(u);
-    bezig.remove();
-    regel(s, u.ok, u.ok ? `${naam}: speelt (${u.methode}, ${u.resolutie})` : `${naam}: ${u.fout}${u.methode ? ` (${u.methode})` : ''}`);
+    for (const methode of methoden) {
+      const bezig = regel(s, null, `${naam} (${methode}): bezig…`);
+      const u = await speelAf(naam, `${adressen.https}/media/${naam}/index.m3u8`, s, methode);
+      rapport.afspelen.push(u);
+      bezig.remove();
+      regel(s, u.ok, u.ok ? `${naam} (${methode}): speelt, ${u.resolutie}` : `${naam} (${methode}): ${u.fout}`);
+    }
   }
 }
 
@@ -172,18 +202,19 @@ function toetsenSectie() {
   s.appendChild(lijst);
   let wacht = null;
   document.addEventListener('keydown', (e) => {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) e.preventDefault();
+    e.preventDefault();
     rapport.toetsen.push({ key: e.key, code: e.code, keyCode: e.keyCode });
     if (rapport.toetsen.length > 50) rapport.toetsen.shift();
     lijst.textContent = '';
     for (const t of rapport.toetsen.slice(-12).reverse()) regel(lijst, null, `key "${t.key}" · code "${t.code}" · keyCode ${t.keyCode}`);
     clearTimeout(wacht);
-    wacht = setTimeout(verstuurRapport, 1000);
+    if (moetDirectVersturen(e.key)) verstuurRapport();
+    else wacht = setTimeout(verstuurRapport, 1000);
   });
 }
 
 async function start() {
-  meetApparaat();
+  await meetApparaat();
   meetCodecSectie();
   await meetCapabilitySectie();
   await meetNetwerkSectie();

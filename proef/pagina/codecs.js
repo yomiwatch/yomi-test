@@ -44,7 +44,7 @@ export const CAPABILITY_GEVALLEN = [
 export function meetCodecs(isTypeSupported) {
   return CODEC_GEVALLEN.map((g) => {
     let ondersteund = false;
-    try { ondersteund = Boolean(isTypeSupported(g.mime)); } catch { ondersteund = false; }
+    try { ondersteund = Boolean(isTypeSupported(g.mime)); } catch (e) { ondersteund = false; }
     return { naam: g.naam, mime: g.mime, ondersteund };
   });
 }
@@ -61,4 +61,23 @@ export async function meetCapabilities(decodingInfo) {
     }
   }
   return uit;
+}
+
+/**
+ * Oudere Chromium negeert onbekende velden zoals transferFunction stil, waardoor de
+ * HDR-meting het SDR-antwoord zou herhalen. Een ongeldige waarde moet een TypeError
+ * geven als de velden echt gelezen worden.
+ * @returns {Promise<'gerespecteerd'|'genegeerd'|'onbekend'>}
+ */
+export async function controleerHdrVelden(decodingInfo) {
+  const config = {
+    type: 'media-source',
+    video: { contentType: HEVC_4K, width: 3840, height: 2160, bitrate: 25000000, framerate: 24, transferFunction: 'ongeldig' },
+  };
+  try {
+    await decodingInfo(config);
+    return 'genegeerd';
+  } catch (e) {
+    return e instanceof TypeError ? 'gerespecteerd' : 'onbekend';
+  }
 }
