@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "ua": "Mozilla/5.0 (Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.4147.62 Safari/537.36 OPR/46.0.2207.0 OMI/4.24, TV_NT72676_2025/058.010.026.001 (Philips, OLED760, wireless) CE-HTML/1.0 NETTV/4.6.0.8 SignOn/2.0 SmartTvA/5.0.0 WhaleTV/2.0 TitanOS/3.0 en Ginga",
+  "time": "2026-11-22T14:16:27.610Z",
+  "pageOrigin": "https://flowan.github.io",
+  "device": {
+    "screen": "1920×1080",
+    "pixelRatio": 1,
+    "viewport": "1920×1080",
+    "hdrScreen": false,
+    "hdrVideo": false,
+    "lnaPermission": "unknown (Failed to execute 'query' on 'Permissions': Failed to read the 'name' property from 'PermissionDescriptor': The provided value 'local-network-access' is not a valid enum value of type PermissionName.)"
+  },
+  "codecs": [
+    {
+      "name": "H.264 High 1080p",
+      "mime": "video/mp4; codecs=\"avc1.640028\"",
+      "supported": true
+    },
+    {
+      "name": "H.264 High 4K",
+      "mime": "video/mp4; codecs=\"avc1.640033\"",
+      "supported": true
+    },
+    {
+      "name": "H.265 Main 1080p (hvc1)",
+      "mime": "video/mp4; codecs=\"hvc1.1.6.L120.90\"",
+      "supported": true
+    },
+    {
+      "name": "H.265 Main10 4K (hvc1)",
+      "mime": "video/mp4; codecs=\"hvc1.2.4.L153.B0\"",
+      "supported": true
+    },
+    {
+      "name": "H.265 Main10 4K (hev1)",
+      "mime": "video/mp4; codecs=\"hev1.2.4.L153.B0\"",
+      "supported": true
+    },
+    {
+      "name": "AV1 10-bit 4K",
+      "mime": "video/mp4; codecs=\"av01.0.12M.10\"",
+      "supported": false
+    },
+    {
+      "name": "VP9 profile 2",
+      "mime": "video/webm; codecs=\"vp09.02.51.10\"",
+      "supported": true
+    },
+    {
+      "name": "AAC",
+      "mime": "audio/mp4; codecs=\"mp4a.40.2\"",
+      "supported": true
+    },
+    {
+      "name": "AC-3",
+      "mime": "audio/mp4; codecs=\"ac-3\"",
+      "supported": true
+    },
+    {
+      "name": "E-AC-3",
+      "mime": "audio/mp4; codecs=\"ec-3\"",
+      "supported": true
+    },
+    {
+      "name": "Opus",
+      "mime": "audio/mp4; codecs=\"opus\"",
+      "supported": true
+    },
+    {
+      "name": "FLAC",
+      "mime": "audio/mp4; codecs=\"flac\"",
+      "supported": true
+    },
+    {
+      "name": "DTS",
+      "mime": "audio/mp4; codecs=\"dtsc\"",
+      "supported": true
+    },
+    {
+      "name": "TrueHD",
+      "mime": "audio/mp4; codecs=\"mlpa\"",
+      "supported": false
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "H.264 1080p30 8 Mbit/s",
+      "supported": true,
+      "smooth": true,
+      "powerEfficient": true
+    },
+    {
+      "name": "H.265 4K60 SDR 25 Mbit/s",
+      "supported": true,
+      "smooth": true,
+      "powerEfficient": true
+    },
+    {
+      "name": "H.265 4K24 HDR10 25 Mbit/s",
+      "supported": true,
+      "smooth": true,
+      "powerEfficient": true
+    }
+  ],
+  "hdrFields": "respected",
+  "network": [
+    {
+      "name": "LAN https (local-ip.sh)",
+      "url": "https://192-168-2-6.local-ip.sh:8443/ping",
+      "ok": true,
+      "status": 200,
+      "ms": 201
+    },
+    {
+      "name": "LAN http (expected blocked)",
+      "url": "http://192.168.2.6:8080/ping",
+      "ok": false,
+      "ms": 2,
+      "error": "Failed to fetch"
+    },
+    {
+      "name": "Same origin (control)",
+      "url": "./ok.txt",
+      "ok": true,
+      "status": 200,
+      "ms": 128
+    }
+  ],
+  "playback": [
+    {
+      "name": "h264-1080p-aac",
+      "ok": true,
+      "method": "hls.js",
+      "resolution": "1920×1080"
+    },
+    {
+      "name": "h264-1080p-aac",
+      "ok": true,
+      "method": "native",
+      "resolution": "1920×1080"
+    },
+    {
+      "name": "h264-1080p-ac3",
+      "ok": true,
+      "method": "hls.js",
+      "resolution": "1920×1080"
+    },
+    {
+      "name": "h264-1080p-ac3",
+      "ok": true,
+      "method": "native",
+      "resolution": "1920×1080"
+    },
+    {
+      "name": "hevc-1080p-aac",
+      "ok": true,
+      "method": "hls.js",
+      "resolution": "1920×1080"
+    },
+    {
+      "name": "hevc-1080p-aac",
+      "ok": true,
+      "method": "native",
+      "resolution": "1920×1080"
+    },
+    {
+      "name": "hevc-4k-sdr-aac",
+      "ok": true,
+      "method": "hls.js",
+      "resolution": "3840×2160"
+    },
+    {
+      "name": "hevc-4k-sdr-aac",
+      "ok": true,
+      "method": "native",
+      "resolution": "3840×2160"
+    },
+    {
+      "name": "hevc-4k-hdr10-aac",
+      "ok": true,
+      "method": "hls.js",
+      "resolution": "3840×2160"
+    },
+    {
+      "name": "hevc-4k-hdr10-aac",
+      "ok": true,
+      "method": "native",
+      "resolution": "3840×2160"
+    },
+    {
+      "name": "hevc-4k-hdr10-eac3",
+      "ok": true,
+      "method": "hls.js",
+      "resolution": "3840×2160"
+    },
+    {
+      "name": "hevc-4k-hdr10-eac3",
+      "ok": true,
+      "method": "native",
+      "resolution": "3840×2160"
+    }
+  ],
+  "keys": [
+    {
+      "key": "ColorF0Red",
+      "code": "",
+      "keyCode": 403
+    },
+    {
+      "key": "ColorF1Green",
+      "code": "",
+      "keyCode": 404
+    },
+    {
+      "key": "ColorF2Yellow",
+      "code": "",
+      "keyCode": 405
+    },
+    {
+      "key": "ColorF3Blue",
+      "code": "",
+      "keyCode": 406
+    },
+    {
+      "key": "Backspace",
+      "code": "Backspace",
+      "keyCode": 8
+    }
+  ],
+  "hlsJs": "loaded, MSE supported",
+  "origin": "https://flowan.github.io",
+  "pnaSeen": true,
+  "pnaPreflights": [
+    {
+      "origin": "https://flowan.github.io",
+      "time": "2026-11-22T14:16:27.693Z",
+      "path": "/rapport"
+    }
+  ]
+}

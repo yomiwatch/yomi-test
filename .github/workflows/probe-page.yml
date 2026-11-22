@@ -1,9 +1,9 @@
-name: Tv-proef publiceren
+name: Publish TV probe
 
 on:
   push:
     branches: [main]
-    paths: ['proef/pagina/**', '.github/workflows/proef-pagina.yml']
+    paths: ['probe/page/**', '.github/workflows/probe-page.yml']
   workflow_dispatch:
 
 permissions:
@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  publiceren:
+  publish:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -26,6 +26,6 @@ jobs:
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: proef/pagina
+          path: probe/page
       - id: deploy
         uses: actions/deploy-pages@v4

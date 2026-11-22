@@ -1,10 +1,10 @@
 {
-  "name": "yomi-proef",
+  "name": "yomi-probe",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "node --test \"test/*.test.ts\"",
     "server": "node server/server.ts",
-    "media": "sh media/maak-media.sh"
+    "media": "sh media/make-media.sh"
   }
 }

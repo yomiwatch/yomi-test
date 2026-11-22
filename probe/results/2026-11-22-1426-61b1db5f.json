@@ -1,207 +1,207 @@
 {
-  "versie": 1,
+  "version": 1,
   "ua": "Mozilla/5.0 (Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.4147.62 Safari/537.36 OPR/46.0.2207.0 OMI/4.24, TV_NT72676_2025/058.010.026.001 (Philips, OLED760, wireless) CE-HTML/1.0 NETTV/4.6.0.8 SignOn/2.0 SmartTvA/5.0.0 WhaleTV/2.0 TitanOS/3.0 en Ginga",
-  "tijd": "2026-11-22T14:26:11.888Z",
-  "herkomstPagina": "https://flowan.github.io",
-  "apparaat": {
-    "scherm": "1920×1080",
+  "time": "2026-11-22T14:26:11.888Z",
+  "pageOrigin": "https://flowan.github.io",
+  "device": {
+    "screen": "1920×1080",
     "pixelRatio": 1,
-    "venster": "1920×1080",
-    "hdrScherm": false,
+    "viewport": "1920×1080",
+    "hdrScreen": false,
     "hdrVideo": false,
-    "lnaToestemming": "onbekend (Failed to execute 'query' on 'Permissions': Failed to read the 'name' property from 'PermissionDescriptor': The provided value 'local-network-access' is not a valid enum value of type PermissionName.)"
+    "lnaPermission": "unknown (Failed to execute 'query' on 'Permissions': Failed to read the 'name' property from 'PermissionDescriptor': The provided value 'local-network-access' is not a valid enum value of type PermissionName.)"
   },
   "codecs": [
     {
-      "naam": "H.264 High 1080p",
+      "name": "H.264 High 1080p",
       "mime": "video/mp4; codecs=\"avc1.640028\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "H.264 High 4K",
+      "name": "H.264 High 4K",
       "mime": "video/mp4; codecs=\"avc1.640033\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "H.265 Main 1080p (hvc1)",
+      "name": "H.265 Main 1080p (hvc1)",
       "mime": "video/mp4; codecs=\"hvc1.1.6.L120.90\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "H.265 Main10 4K (hvc1)",
+      "name": "H.265 Main10 4K (hvc1)",
       "mime": "video/mp4; codecs=\"hvc1.2.4.L153.B0\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "H.265 Main10 4K (hev1)",
+      "name": "H.265 Main10 4K (hev1)",
       "mime": "video/mp4; codecs=\"hev1.2.4.L153.B0\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "AV1 10-bit 4K",
+      "name": "AV1 10-bit 4K",
       "mime": "video/mp4; codecs=\"av01.0.12M.10\"",
-      "ondersteund": false
+      "supported": false
     },
     {
-      "naam": "VP9 profiel 2",
+      "name": "VP9 profile 2",
       "mime": "video/webm; codecs=\"vp09.02.51.10\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "AAC",
+      "name": "AAC",
       "mime": "audio/mp4; codecs=\"mp4a.40.2\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "AC-3",
+      "name": "AC-3",
       "mime": "audio/mp4; codecs=\"ac-3\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "E-AC-3",
+      "name": "E-AC-3",
       "mime": "audio/mp4; codecs=\"ec-3\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "Opus",
+      "name": "Opus",
       "mime": "audio/mp4; codecs=\"opus\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "FLAC",
+      "name": "FLAC",
       "mime": "audio/mp4; codecs=\"flac\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "DTS",
+      "name": "DTS",
       "mime": "audio/mp4; codecs=\"dtsc\"",
-      "ondersteund": true
+      "supported": true
     },
     {
-      "naam": "TrueHD",
+      "name": "TrueHD",
       "mime": "audio/mp4; codecs=\"mlpa\"",
-      "ondersteund": false
+      "supported": false
     }
   ],
   "capabilities": [
     {
-      "naam": "H.264 1080p30 8 Mbit/s",
+      "name": "H.264 1080p30 8 Mbit/s",
       "supported": true,
       "smooth": true,
       "powerEfficient": true
     },
     {
-      "naam": "H.265 4K60 SDR 25 Mbit/s",
+      "name": "H.265 4K60 SDR 25 Mbit/s",
       "supported": true,
       "smooth": true,
       "powerEfficient": true
     },
     {
-      "naam": "H.265 4K24 HDR10 25 Mbit/s",
+      "name": "H.265 4K24 HDR10 25 Mbit/s",
       "supported": true,
       "smooth": true,
       "powerEfficient": true
     }
   ],
-  "hdrVelden": "gerespecteerd",
-  "netwerk": [
+  "hdrFields": "respected",
+  "network": [
     {
-      "naam": "LAN https (local-ip.sh)",
+      "name": "LAN https (local-ip.sh)",
       "url": "https://192-168-2-6.local-ip.sh:8443/ping",
       "ok": true,
       "status": 200,
       "ms": 201
     },
     {
-      "naam": "LAN http (verwacht geblokkeerd)",
+      "name": "LAN http (expected blocked)",
       "url": "http://192.168.2.6:8080/ping",
       "ok": false,
       "ms": 2,
-      "fout": "Failed to fetch"
+      "error": "Failed to fetch"
     },
     {
-      "naam": "Eigen herkomst (controle)",
+      "name": "Same origin (control)",
       "url": "./ok.txt",
       "ok": true,
       "status": 200,
       "ms": 128
     }
   ],
-  "afspelen": [
+  "playback": [
     {
-      "naam": "h264-1080p-aac",
+      "name": "h264-1080p-aac",
       "ok": true,
-      "methode": "hls.js",
-      "resolutie": "1920×1080"
+      "method": "hls.js",
+      "resolution": "1920×1080"
     },
     {
-      "naam": "h264-1080p-aac",
+      "name": "h264-1080p-aac",
       "ok": true,
-      "methode": "native",
-      "resolutie": "1920×1080"
+      "method": "native",
+      "resolution": "1920×1080"
     },
     {
-      "naam": "h264-1080p-ac3",
+      "name": "h264-1080p-ac3",
       "ok": true,
-      "methode": "hls.js",
-      "resolutie": "1920×1080"
+      "method": "hls.js",
+      "resolution": "1920×1080"
     },
     {
-      "naam": "h264-1080p-ac3",
+      "name": "h264-1080p-ac3",
       "ok": true,
-      "methode": "native",
-      "resolutie": "1920×1080"
+      "method": "native",
+      "resolution": "1920×1080"
     },
     {
-      "naam": "hevc-1080p-aac",
+      "name": "hevc-1080p-aac",
       "ok": true,
-      "methode": "hls.js",
-      "resolutie": "1920×1080"
+      "method": "hls.js",
+      "resolution": "1920×1080"
     },
     {
-      "naam": "hevc-1080p-aac",
+      "name": "hevc-1080p-aac",
       "ok": true,
-      "methode": "native",
-      "resolutie": "1920×1080"
+      "method": "native",
+      "resolution": "1920×1080"
     },
     {
-      "naam": "hevc-4k-sdr-aac",
+      "name": "hevc-4k-sdr-aac",
       "ok": true,
-      "methode": "hls.js",
-      "resolutie": "3840×2160"
+      "method": "hls.js",
+      "resolution": "3840×2160"
     },
     {
-      "naam": "hevc-4k-sdr-aac",
+      "name": "hevc-4k-sdr-aac",
       "ok": true,
-      "methode": "native",
-      "resolutie": "3840×2160"
+      "method": "native",
+      "resolution": "3840×2160"
     },
     {
-      "naam": "hevc-4k-hdr10-aac",
+      "name": "hevc-4k-hdr10-aac",
       "ok": true,
-      "methode": "hls.js",
-      "resolutie": "3840×2160"
+      "method": "hls.js",
+      "resolution": "3840×2160"
     },
     {
-      "naam": "hevc-4k-hdr10-aac",
+      "name": "hevc-4k-hdr10-aac",
       "ok": true,
-      "methode": "native",
-      "resolutie": "3840×2160"
+      "method": "native",
+      "resolution": "3840×2160"
     },
     {
-      "naam": "hevc-4k-hdr10-eac3",
+      "name": "hevc-4k-hdr10-eac3",
       "ok": true,
-      "methode": "hls.js",
-      "resolutie": "3840×2160"
+      "method": "hls.js",
+      "resolution": "3840×2160"
     },
     {
-      "naam": "hevc-4k-hdr10-eac3",
+      "name": "hevc-4k-hdr10-eac3",
       "ok": true,
-      "methode": "native",
-      "resolutie": "3840×2160"
+      "method": "native",
+      "resolution": "3840×2160"
     }
   ],
-  "toetsen": [
+  "keys": [
     {
       "key": "ColorF0Red",
       "code": "",
@@ -238,14 +238,14 @@
       "keyCode": 8
     }
   ],
-  "hlsJs": "geladen, MSE ondersteund",
-  "herkomst": "https://flowan.github.io",
-  "pnaGezien": true,
+  "hlsJs": "loaded, MSE supported",
+  "origin": "https://flowan.github.io",
+  "pnaSeen": true,
   "pnaPreflights": [
     {
       "origin": "https://flowan.github.io",
-      "tijd": "2026-11-22T14:26:12.065Z",
-      "pad": "/rapport"
+      "time": "2026-11-22T14:26:12.065Z",
+      "path": "/rapport"
     }
   ]
 }

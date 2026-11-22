@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+  "time": "2026-11-22T13:45:52.773Z",
+  "pageOrigin": "https://192-168-2-6.local-ip.sh:8443",
+  "device": {
+    "screen": "1440×900",
+    "pixelRatio": 2,
+    "viewport": "1440×670",
+    "hdrScreen": false,
+    "hdrVideo": false,
+    "lnaPermission": "prompt"
+  },
+  "codecs": [
+    {
+      "name": "H.264 High 1080p",
+      "mime": "video/mp4; codecs=\"avc1.640028\"",
+      "supported": true
+    },
+    {
+      "name": "H.264 High 4K",
+      "mime": "video/mp4; codecs=\"avc1.640033\"",
+      "supported": true
+    },
+    {
+      "name": "H.265 Main 1080p (hvc1)",
+      "mime": "video/mp4; codecs=\"hvc1.1.6.L120.90\"",
+      "supported": true
+    },
+    {
+      "name": "H.265 Main10 4K (hvc1)",
+      "mime": "video/mp4; codecs=\"hvc1.2.4.L153.B0\"",
+      "supported": true
+    },
+    {
+      "name": "H.265 Main10 4K (hev1)",
+      "mime": "video/mp4; codecs=\"hev1.2.4.L153.B0\"",
+      "supported": true
+    },
+    {
+      "name": "AV1 10-bit 4K",
+      "mime": "video/mp4; codecs=\"av01.0.12M.10\"",
+      "supported": true
+    },
+    {
+      "name": "VP9 profile 2",
+      "mime": "video/webm; codecs=\"vp09.02.51.10\"",
+      "supported": true
+    },
+    {
+      "name": "AAC",
+      "mime": "audio/mp4; codecs=\"mp4a.40.2\"",
+      "supported": true
+    },
+    {
+      "name": "AC-3",
+      "mime": "audio/mp4; codecs=\"ac-3\"",
+      "supported": false
+    },
+    {
+      "name": "E-AC-3",
+      "mime": "audio/mp4; codecs=\"ec-3\"",
+      "supported": false
+    },
+    {
+      "name": "Opus",
+      "mime": "audio/mp4; codecs=\"opus\"",
+      "supported": true
+    },
+    {
+      "name": "FLAC",
+      "mime": "audio/mp4; codecs=\"flac\"",
+      "supported": true
+    },
+    {
+      "name": "DTS",
+      "mime": "audio/mp4; codecs=\"dtsc\"",
+      "supported": false
+    },
+    {
+      "name": "TrueHD",
+      "mime": "audio/mp4; codecs=\"mlpa\"",
+      "supported": false
+    }
+  ],
+  "capabilities": [
+    {
+      "name": "H.264 1080p30 8 Mbit/s",
+      "supported": true,
+      "smooth": true,
+      "powerEfficient": true
+    },
+    {
+      "name": "H.265 4K60 SDR 25 Mbit/s",
+      "supported": true,
+      "smooth": true,
+      "powerEfficient": true
+    },
+    {
+      "name": "H.265 4K24 HDR10 25 Mbit/s",
+      "supported": true,
+      "smooth": true,
+      "powerEfficient": true
+    }
+  ],
+  "hdrFields": "respected",
+  "network": [
+    {
+      "name": "LAN https (local-ip.sh)",
+      "url": "https://192-168-2-6.local-ip.sh:8443/ping",
+      "ok": true,
+      "status": 200,
+      "ms": 2
+    },
+    {
+      "name": "LAN http (expected blocked)",
+      "url": "http://192.168.2.6:8080/ping",
+      "ok": true,
+      "status": 200,
+      "ms": 3
+    },
+    {
+      "name": "Same origin (control)",
+      "url": "./ok.txt",
+      "ok": true,
+      "status": 200,
+      "ms": 3
+    }
+  ],
+  "playback": [
+    {
+      "name": "h264-1080p-aac",
+      "ok": true,
+      "method": "hls.js",
+      "resolution": "1920×1080"
+    },
+    {
+      "name": "h264-1080p-aac",
+      "ok": true,
+      "method": "native",
+      "resolution": "1920×1080"
+    },
+    {
+      "name": "h264-1080p-ac3",
+      "ok": false,
+      "method": "hls.js",
+      "resolution": "0×0",
+      "error": "hls.js: mediaError bufferAddCodecError"
+    },
+    {
+      "name": "h264-1080p-ac3",
+      "ok": false,
+      "method": "native",
+      "resolution": "0×0",
+      "error": "video error 4"
+    },
+    {
+      "name": "hevc-1080p-aac",
+      "ok": true,
+      "method": "hls.js",
+      "resolution": "1920×1080"
+    },
+    {
+      "name": "hevc-1080p-aac",
+      "ok": true,
+      "method": "native",
+      "resolution": "1920×1080"
+    },
+    {
+      "name": "hevc-4k-sdr-aac",
+      "ok": true,
+      "method": "hls.js",
+      "resolution": "3840×2160"
+    },
+    {
+      "name": "hevc-4k-sdr-aac",
+      "ok": true,
+      "method": "native",
+      "resolution": "3840×2160"
+    },
+    {
+      "name": "hevc-4k-hdr10-aac",
+      "ok": true,
+      "method": "hls.js",
+      "resolution": "3840×2160"
+    },
+    {
+      "name": "hevc-4k-hdr10-aac",
+      "ok": true,
+      "method": "native",
+      "resolution": "3840×2160"
+    },
+    {
+      "name": "hevc-4k-hdr10-eac3",
+      "ok": false,
+      "method": "hls.js",
+      "resolution": "0×0",
+      "error": "hls.js: mediaError bufferAddCodecError"
+    },
+    {
+      "name": "hevc-4k-hdr10-eac3",
+      "ok": false,
+      "method": "native",
+      "resolution": "0×0",
+      "error": "video error 4"
+    }
+  ],
+  "keys": [],
+  "hlsJs": "loaded, MSE supported",
+  "origin": "https://192-168-2-6.local-ip.sh:8443",
+  "pnaSeen": false,
+  "pnaPreflights": []
+}
