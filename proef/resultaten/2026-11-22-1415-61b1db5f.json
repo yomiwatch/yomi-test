@@ -1,0 +1,370 @@
+{
+  "versie": 1,
+  "ua": "Mozilla/5.0 (Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.4147.62 Safari/537.36 OPR/46.0.2207.0 OMI/4.24, TV_NT72676_2025/058.010.026.001 (Philips, OLED760, wireless) CE-HTML/1.0 NETTV/4.6.0.8 SignOn/2.0 SmartTvA/5.0.0 WhaleTV/2.0 TitanOS/3.0 en Ginga",
+  "tijd": "2026-11-22T14:15:47.684Z",
+  "herkomstPagina": "https://flowan.github.io",
+  "apparaat": {
+    "scherm": "1920×1080",
+    "pixelRatio": 1,
+    "venster": "1920×1080",
+    "hdrScherm": false,
+    "hdrVideo": false,
+    "lnaToestemming": "onbekend (Failed to execute 'query' on 'Permissions': Failed to read the 'name' property from 'PermissionDescriptor': The provided value 'local-network-access' is not a valid enum value of type PermissionName.)"
+  },
+  "codecs": [
+    {
+      "naam": "H.264 High 1080p",
+      "mime": "video/mp4; codecs=\"avc1.640028\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "H.264 High 4K",
+      "mime": "video/mp4; codecs=\"avc1.640033\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "H.265 Main 1080p (hvc1)",
+      "mime": "video/mp4; codecs=\"hvc1.1.6.L120.90\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "H.265 Main10 4K (hvc1)",
+      "mime": "video/mp4; codecs=\"hvc1.2.4.L153.B0\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "H.265 Main10 4K (hev1)",
+      "mime": "video/mp4; codecs=\"hev1.2.4.L153.B0\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "AV1 10-bit 4K",
+      "mime": "video/mp4; codecs=\"av01.0.12M.10\"",
+      "ondersteund": false
+    },
+    {
+      "naam": "VP9 profiel 2",
+      "mime": "video/webm; codecs=\"vp09.02.51.10\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "AAC",
+      "mime": "audio/mp4; codecs=\"mp4a.40.2\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "AC-3",
+      "mime": "audio/mp4; codecs=\"ac-3\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "E-AC-3",
+      "mime": "audio/mp4; codecs=\"ec-3\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "Opus",
+      "mime": "audio/mp4; codecs=\"opus\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "FLAC",
+      "mime": "audio/mp4; codecs=\"flac\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "DTS",
+      "mime": "audio/mp4; codecs=\"dtsc\"",
+      "ondersteund": true
+    },
+    {
+      "naam": "TrueHD",
+      "mime": "audio/mp4; codecs=\"mlpa\"",
+      "ondersteund": false
+    }
+  ],
+  "capabilities": [
+    {
+      "naam": "H.264 1080p30 8 Mbit/s",
+      "supported": true,
+      "smooth": true,
+      "powerEfficient": true
+    },
+    {
+      "naam": "H.265 4K60 SDR 25 Mbit/s",
+      "supported": true,
+      "smooth": true,
+      "powerEfficient": true
+    },
+    {
+      "naam": "H.265 4K24 HDR10 25 Mbit/s",
+      "supported": true,
+      "smooth": true,
+      "powerEfficient": true
+    }
+  ],
+  "hdrVelden": "gerespecteerd",
+  "netwerk": [
+    {
+      "naam": "LAN https (local-ip.sh)",
+      "url": "https://192-168-2-6.local-ip.sh:8443/ping",
+      "ok": true,
+      "status": 200,
+      "ms": 201
+    },
+    {
+      "naam": "LAN http (verwacht geblokkeerd)",
+      "url": "http://192.168.2.6:8080/ping",
+      "ok": false,
+      "ms": 2,
+      "fout": "Failed to fetch"
+    },
+    {
+      "naam": "Eigen herkomst (controle)",
+      "url": "./ok.txt",
+      "ok": true,
+      "status": 200,
+      "ms": 128
+    }
+  ],
+  "afspelen": [
+    {
+      "naam": "h264-1080p-aac",
+      "ok": true,
+      "methode": "hls.js",
+      "resolutie": "1920×1080"
+    },
+    {
+      "naam": "h264-1080p-aac",
+      "ok": true,
+      "methode": "native",
+      "resolutie": "1920×1080"
+    },
+    {
+      "naam": "h264-1080p-ac3",
+      "ok": true,
+      "methode": "hls.js",
+      "resolutie": "1920×1080"
+    },
+    {
+      "naam": "h264-1080p-ac3",
+      "ok": true,
+      "methode": "native",
+      "resolutie": "1920×1080"
+    },
+    {
+      "naam": "hevc-1080p-aac",
+      "ok": true,
+      "methode": "hls.js",
+      "resolutie": "1920×1080"
+    },
+    {
+      "naam": "hevc-1080p-aac",
+      "ok": true,
+      "methode": "native",
+      "resolutie": "1920×1080"
+    },
+    {
+      "naam": "hevc-4k-sdr-aac",
+      "ok": true,
+      "methode": "hls.js",
+      "resolutie": "3840×2160"
+    },
+    {
+      "naam": "hevc-4k-sdr-aac",
+      "ok": true,
+      "methode": "native",
+      "resolutie": "3840×2160"
+    },
+    {
+      "naam": "hevc-4k-hdr10-aac",
+      "ok": true,
+      "methode": "hls.js",
+      "resolutie": "3840×2160"
+    },
+    {
+      "naam": "hevc-4k-hdr10-aac",
+      "ok": true,
+      "methode": "native",
+      "resolutie": "3840×2160"
+    },
+    {
+      "naam": "hevc-4k-hdr10-eac3",
+      "ok": true,
+      "methode": "hls.js",
+      "resolutie": "3840×2160"
+    },
+    {
+      "naam": "hevc-4k-hdr10-eac3",
+      "ok": true,
+      "methode": "native",
+      "resolutie": "3840×2160"
+    }
+  ],
+  "toetsen": [],
+  "hlsJs": "geladen, MSE ondersteund",
+  "herkomst": "https://flowan.github.io",
+  "pnaGezien": true,
+  "pnaPreflights": [
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:10.392Z",
+      "pad": "/ping"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:10.572Z",
+      "pad": "/media/h264-1080p-aac/index.m3u8"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:10.622Z",
+      "pad": "/media/h264-1080p-aac/init.mp4"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:10.650Z",
+      "pad": "/media/h264-1080p-aac/seg0.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:11.203Z",
+      "pad": "/media/h264-1080p-aac/seg1.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:11.588Z",
+      "pad": "/media/h264-1080p-aac/seg2.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:16.318Z",
+      "pad": "/media/h264-1080p-ac3/index.m3u8"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:16.350Z",
+      "pad": "/media/h264-1080p-ac3/init.mp4"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:16.384Z",
+      "pad": "/media/h264-1080p-ac3/seg0.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:16.831Z",
+      "pad": "/media/h264-1080p-ac3/seg1.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:17.141Z",
+      "pad": "/media/h264-1080p-ac3/seg2.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:22.238Z",
+      "pad": "/media/hevc-1080p-aac/index.m3u8"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:22.269Z",
+      "pad": "/media/hevc-1080p-aac/init.mp4"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:22.294Z",
+      "pad": "/media/hevc-1080p-aac/seg0.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:22.691Z",
+      "pad": "/media/hevc-1080p-aac/seg1.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:22.938Z",
+      "pad": "/media/hevc-1080p-aac/seg2.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:27.868Z",
+      "pad": "/media/hevc-4k-sdr-aac/index.m3u8"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:27.895Z",
+      "pad": "/media/hevc-4k-sdr-aac/init.mp4"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:27.916Z",
+      "pad": "/media/hevc-4k-sdr-aac/seg0.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:28.695Z",
+      "pad": "/media/hevc-4k-sdr-aac/seg1.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:29.434Z",
+      "pad": "/media/hevc-4k-sdr-aac/seg2.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:34.382Z",
+      "pad": "/media/hevc-4k-hdr10-aac/index.m3u8"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:34.412Z",
+      "pad": "/media/hevc-4k-hdr10-aac/init.mp4"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:34.448Z",
+      "pad": "/media/hevc-4k-hdr10-aac/seg0.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:35.350Z",
+      "pad": "/media/hevc-4k-hdr10-aac/seg1.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:36.114Z",
+      "pad": "/media/hevc-4k-hdr10-aac/seg2.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:41.077Z",
+      "pad": "/media/hevc-4k-hdr10-eac3/index.m3u8"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:41.109Z",
+      "pad": "/media/hevc-4k-hdr10-eac3/init.mp4"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:41.135Z",
+      "pad": "/media/hevc-4k-hdr10-eac3/seg0.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:42.035Z",
+      "pad": "/media/hevc-4k-hdr10-eac3/seg1.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:42.832Z",
+      "pad": "/media/hevc-4k-hdr10-eac3/seg2.m4s"
+    },
+    {
+      "origin": "https://flowan.github.io",
+      "tijd": "2026-11-22T14:15:47.766Z",
+      "pad": "/rapport"
+    }
+  ]
+}
