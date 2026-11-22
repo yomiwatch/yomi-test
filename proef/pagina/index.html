@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yomi · tv-proef</title>
+<style>
+  html, body { margin: 0; background: #000; color: #fff; font-family: system-ui, sans-serif; font-size: 24px; }
+  main { padding: 40px 64px; display: grid; grid-template-columns: repeat(auto-fit, minmax(760px, 1fr)); gap: 24px 48px; }
+  h1 { margin: 0 0 8px; font-size: 40px; grid-column: 1 / -1; }
+  .intro { grid-column: 1 / -1; color: #bbb; margin: 0; }
+  section h2 { margin: 0 0 12px; font-size: 30px; color: #F2B544; }
+  .regel { display: flex; gap: 14px; padding: 4px 0; line-height: 1.35; }
+  .ok { color: #6EE7A0; font-weight: 700; min-width: 1.6em; }
+  .nok { color: #FF8A8A; font-weight: 700; min-width: 1.6em; }
+  .info { color: #bbb; min-width: 1.6em; }
+  .klein { color: #bbb; font-size: 20px; word-break: break-all; }
+  video { width: 480px; height: 270px; background: #111; margin-top: 8px; }
+  #rapport { grid-column: 1 / -1; font-size: 28px; font-weight: 700; }
+</style>
+</head>
+<body>
+<main id="uitvoer">
+  <h1>Yomi · tv-proef</h1>
+  <p class="intro">De metingen starten vanzelf. Wacht tot "Rapport" onderaan iets meldt. Druk daarna op de toetsen uit de sectie "Toetsen".</p>
+</main>
+<script>window.hlsMislukt = false;</script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js" onerror="window.hlsMislukt = true"></script>
+<script type="module" src="./proef.js"></script>
+</body>
+</html>
