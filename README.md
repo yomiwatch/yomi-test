@@ -1,6 +1,6 @@
 # yomi-test
 
-Yomi's TV probe: a measurement tool to test on the real TV what the browser can do. Moved from [yomi-app](https://github.com/yomiwatch/yomi-app).
+Yomi's TV probe: a measurement tool to test on the real TV what the browser can do. Moved from [yomi-tv](https://github.com/yomiwatch/yomi-tv) (then yomi-app).
 
 - Probe: [probe/README.md](probe/README.md)
 - Plan: [docs/superpowers/plans/2026-11-22-tv-probe.md](docs/superpowers/plans/2026-11-22-tv-probe.md)
